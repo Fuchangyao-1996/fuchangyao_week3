@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuchangyao.mapper.BoughtGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.fuchangyao.pojo.BoughtGoods">
+    <id column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="gname" jdbcType="VARCHAR" property="gname" />
+    <result column="gprice" jdbcType="DOUBLE" property="gprice" />
+    <result column="gjifen" jdbcType="INTEGER" property="gjifen" />
+    <result column="bgoumai" jdbcType="VARCHAR" property="bgoumai" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    bid, gname, gprice, gjifen, bgoumai, uname, createdate
+  </sql>
+
+  <select id="findOne" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT * FROM t_bought_goods WHERE bid=#{bid}
+  </select>
+
+
+  <select id="selectByExample" parameterType="com.fuchangyao.pojo.BoughtGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_bought_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_bought_goods
+    where bid = #{bid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_bought_goods
+    where bid = #{bid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fuchangyao.pojo.BoughtGoodsExample">
+    delete from t_bought_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fuchangyao.pojo.BoughtGoods">
+    insert into t_bought_goods (bid, gname, gprice, 
+      gjifen, bgoumai, uname, 
+      createdate)
+    values (#{bid,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, #{gprice,jdbcType=DOUBLE}, 
+      #{gjifen,jdbcType=INTEGER}, #{bgoumai,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuchangyao.pojo.BoughtGoods">
+    insert into t_bought_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        bid,
+      </if>
+      <if test="gname != null">
+        gname,
+      </if>
+      <if test="gprice != null">
+        gprice,
+      </if>
+      <if test="gjifen != null">
+        gjifen,
+      </if>
+      <if test="bgoumai != null">
+        bgoumai,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null">
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gprice != null">
+        #{gprice,jdbcType=DOUBLE},
+      </if>
+      <if test="gjifen != null">
+        #{gjifen,jdbcType=INTEGER},
+      </if>
+      <if test="bgoumai != null">
+        #{bgoumai,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fuchangyao.pojo.BoughtGoodsExample" resultType="java.lang.Long">
+    select count(*) from t_bought_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_bought_goods
+    <set>
+      <if test="record.bid != null">
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gname != null">
+        gname = #{record.gname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gprice != null">
+        gprice = #{record.gprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.gjifen != null">
+        gjifen = #{record.gjifen,jdbcType=INTEGER},
+      </if>
+      <if test="record.bgoumai != null">
+        bgoumai = #{record.bgoumai,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null">
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_bought_goods
+    set bid = #{record.bid,jdbcType=INTEGER},
+      gname = #{record.gname,jdbcType=VARCHAR},
+      gprice = #{record.gprice,jdbcType=DOUBLE},
+      gjifen = #{record.gjifen,jdbcType=INTEGER},
+      bgoumai = #{record.bgoumai,jdbcType=VARCHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuchangyao.pojo.BoughtGoods">
+    update t_bought_goods
+    <set>
+      <if test="gname != null">
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gprice != null">
+        gprice = #{gprice,jdbcType=DOUBLE},
+      </if>
+      <if test="gjifen != null">
+        gjifen = #{gjifen,jdbcType=INTEGER},
+      </if>
+      <if test="bgoumai != null">
+        bgoumai = #{bgoumai,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+    </set>
+    where bid = #{bid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuchangyao.pojo.BoughtGoods">
+    update t_bought_goods
+    set gname = #{gname,jdbcType=VARCHAR},
+      gprice = #{gprice,jdbcType=DOUBLE},
+      gjifen = #{gjifen,jdbcType=INTEGER},
+      bgoumai = #{bgoumai,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE}
+    where bid = #{bid,jdbcType=INTEGER}
+  </update>
+</mapper>

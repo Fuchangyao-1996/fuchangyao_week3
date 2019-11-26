@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="t_dao" />
+        <module name="t_interface" />
+        <module name="t_pojo" />
+        <module name="t_service" />
+        <module name="t_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fuchangyao_week3" target="1.7" />
+      <module name="t_dao" target="1.7" />
+      <module name="t_interface" target="1.7" />
+      <module name="t_pojo" target="1.7" />
+      <module name="t_service" target="1.7" />
+      <module name="t_web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
